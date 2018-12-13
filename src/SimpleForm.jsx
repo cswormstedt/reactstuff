@@ -1,6 +1,8 @@
 import React from "react";
-
 import Greetings from './Greetings.jsx';
+import TextField from './TextField.jsx';
+import FirstNameField from './FirstNameField.jsx';
+import LastNameField from './LastNameField.jsx';
 
 export default class SimpleForm extends React.Component {
     state = {
@@ -47,33 +49,21 @@ export default class SimpleForm extends React.Component {
 
         return ( 
             <div >
-                <div>
-                    <input
-                        type="text" 
-                        placeholder="First Name"
-                        name="firstName" 
-                        onChange={this.onFirstNameChange}
-                        onBlur={this.onFirstNameBlur}
-                    />
-                    {firstNameError && <div>{firstNameError}</div>}
-                </div>
-                <div>
-                    <input 
-                        type="text"
-                        placeholder="Last Name"
-                        name="lastName"
-                        onChange={this.onLastNameChange}
-                        onBlur={this.onLastNameBlur}
-                    />
-                    {lastNameError && <div>{lastNameError}</div>}
-                </div>
-    
+                <FirstNameField
+                    onChange={this.onFirstNameChange}
+                    onBlur={this.onFirstNameBlur}
+                    error={firstNameError}             
+                />
+                <LastNameField
+                    onChange={this.onLastNameChange}
+                    onBlur={this.onLastNameBlur}
+                    error={lastNameError}
+                />
                 <Greetings 
                     firstName={this.state.firstName}
                     lastName={this.state.lastName}
                 />
-            </div>
-            
+            </div>       
         );
     }
 }
