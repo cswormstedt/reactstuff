@@ -2,7 +2,7 @@ import React from "react";
 
 const Greetings = ({firstName, lastName})=> (
     <div>
-        Hey {firstName} {lastName}!
+        Sup {firstName} {lastName}!
     </div>
 );
 
