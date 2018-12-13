@@ -1,12 +1,14 @@
 import React from "react";
-import style from './Style.js';
+
 import Greetings from './Greetings.jsx';
 
 export default class SimpleForm extends React.Component {
     state = {
         firstName: "",
         firstNameError: "",
-    };
+        lastName: "",
+        lastNameError: ""
+        };
     
     validateName = name => {
         const regex = /[A-Za-z]{3,}/;
@@ -23,33 +25,53 @@ export default class SimpleForm extends React.Component {
 
         return this.setState({firstNameError});
     };
+    onLastNameBlur = () => {
+        const {lastName} = this.state;
+
+        const lastNameError = this.validateName(lastName);
+
+        return this.setState({lastNameError});
+    };
 
     onFirstNameChange = event =>
     this.setState({
         firstName: event.target.value
     });
+
+    onLastNameChange = event =>
+    this.setState({
+        lastName: event.target.value
+    });
     render() {
-        const {firstNameError, firstName} = this.state;
+        const {firstNameError, firstName, lastName, lastNameError} = this.state;
 
         return ( 
-                <div style={style.form}>>
-                <div style={style.inputGroup}>
-                    <label>
-                        First Name:
-                        <input 
-                            style={style.input}
-                            type="text" 
-                            name="firstName" 
-                            onChange={this.onFirstNameChange}
-                            onBlur={this.onFirstNameBlur}
-                        />
-                        {firstNameError && <div style={style.error}>{firstNameError}</div>}
-                    </label>
-                    
-                </div> 
-                    <Greetings 
-                        firstName={this.state.firstName}
+            <div >
+                <div>
+                    <input
+                        type="text" 
+                        placeholder="First Name"
+                        name="firstName" 
+                        onChange={this.onFirstNameChange}
+                        onBlur={this.onFirstNameBlur}
                     />
+                    {firstNameError && <div>{firstNameError}</div>}
+                </div>
+                <div>
+                    <input 
+                        type="text"
+                        placeholder="Last Name"
+                        name="lastName"
+                        onChange={this.onLastNameChange}
+                        onBlur={this.onLastNameBlur}
+                    />
+                    {lastNameError && <div>{lastNameError}</div>}
+                </div>
+    
+                <Greetings 
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
+                />
             </div>
             
         );
